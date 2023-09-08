@@ -1,0 +1,108 @@
+<div class="card" xmlns="http://www.w3.org/1999/html">
+  <div class="card-top border-bottom text-center">
+    <a href="#" class="back-to-shop">Back to shop</a>
+    <span id="logo">Phone Shop</span>
+  </div>
+  <div class="card-body">
+    <div class="row upper">
+      <h3>Thanh Toán</h3>
+    </div>
+    <form [formGroup]="paymentForm" (ngSubmit)="savePayment()">
+      <div class="row">
+        <div class="col-md-7">
+          <div class="left border">
+            <div class="row">
+              <span class="header" style="color: black"><b>Thông tin khách hàng</b></span>
+              <div class="icons">
+                <img src="https://img.icons8.com/color/48/000000/visa.png"/>
+                <img src="https://img.icons8.com/color/48/000000/mastercard-logo.png"/>
+                <img src="https://img.icons8.com/color/48/000000/maestro.png"/>
+              </div>
+            </div>
+            <button class="custom-button">Khách hàng cũ</button>
+            <br>
+            <span>Họ và tên</span>
+            <input placeholder="Họ và tên" formControlName="customerName">
+            <span>Số điện thoại:</span>
+            <input placeholder="Số điện thoại" formControlName="phoneNumber">
+            <span>Địa chỉ</span>
+            <input placeholder="Địa chỉ" formControlName="address">
+<!--            <span>Tuổi:</span>-->
+<!--            <input placeholder="Tuổi" formControlName="">-->
+            <span>Email:</span>
+            <input placeholder="Email" formControlName="email">
+            <h3>Thông tin sản phẩm</h3>
+            <button class="custom-button">Chọn sản phẩm</button>
+            <br>
+            <form [formGroup]="productForm" (ngSubmit)="saveProduct()">
+              <span>Tên:</span>
+              <input placeholder="Tên sản phẩm" formControlName="productName" [(ngModel)]="newProduct.name">
+              <span>Đơn giá:</span>
+              <input placeholder="Đơn giá" formControlName="price" [(ngModel)]="newProduct.price">
+              <span>Số lượng:</span>
+              <input placeholder="Số lượng" formControlName="quantity" [(ngModel)]="newProduct.quantity">
+              <button class="custom-button" type="submit">+ Thêm sản phẩm</button>
+            </form>
+          </div>
+        </div>
+        <div class="col-md-5">
+          <div class="right border">
+            <div class="header">Sản phẩm đang mua</div>
+            <div class="row item">
+              <!--              <div class="col-4 align-self-center">-->
+              <!--                <img class="img-fluid" src="./assets/image/phone.jpg"></div>-->
+              <div class="col-8" *ngFor="let product of products | paginate: {itemsPerPage: 2, currentPage: p}">
+<!--                <input formControlName="customerName" [(ngModel)]="inputData" type="text" [style.display]="isInputHidden ? 'none' : 'block'"   />-->
+                <div class="row text-muted">{{'Tên sản phẩm: ' + product.name}}</div>
+                <div class="row">{{'Giá: ' + product.price + ' VND'}}</div>
+                <div class="row">{{'Số lượng: ' + product.quantity + ' VND'}}</div>
+                <br>
+              </div>
+            </div>
+            <div *ngIf="products.length<=0">
+              <h6 style="text-align: center">Chưa có sản phẩm nào được mua.</h6>
+            </div>
+            <div *ngIf="products.length > 0">
+              <pagination-controls class="my-pagination" (pageChange)="p = $event" previousLabel="" nextLabel=""
+                                   style="text-align: center"></pagination-controls>
+            </div>
+            <hr>
+            <div class="row lower">
+              <div class="col text-left">Tổng tiền</div>
+              <div class="col text-right">{{totalAmount + ' VND'}}</div>
+            </div>
+            <div class="row lower">
+              <div class="col text-left">Mã giảm giá</div>
+              <div class="col text-right">Không có</div>
+            </div>
+            <div class="row lower">
+              <div class="col text-left"><b>Thanh toán</b></div>
+              <div class="col text-right"><b>{{totalAmount + ' VND'}}</b></div>
+            </div>
+            <div class="row lower">
+              <label>Thanh toan</label>
+              <input type="text" formControlName="payments">
+              <!--            <div class="col text-left" formControlName="bill">Hình thức thanh toán</div>-->
+              <!--            <div>-->
+              <!--              <label for="creditCardRadio" style="display: block;">Thẻ tín dụng-->
+              <!--                <input type="radio" id="creditCardRadio" name="paymentMethod" value="creditCard">-->
+              <!--              </label>-->
+              <!--            </div>-->
+              <!--            <div>-->
+              <!--              <label for="cashRadio">Tiền mặt-->
+              <!--                <input type="radio" id="cashRadio" name="paymentMethod" value="cash">-->
+              <!--              </label>-->
+              <!--            </div>-->
+            </div>
+            <input type="checkbox" id="save_card" class="align-left print_bill">
+            <label for="save_card">In hóa đơn </label>
+            <button class="btn custom-btn" type="submit">Tiến hành thanh toán</button>
+            <p class="text-muted text-center">Complimentary Shipping & Returns</p>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div>
+  </div>
+</div>

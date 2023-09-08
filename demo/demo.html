@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Thanh toán sản phẩm</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+        h1 {
+            margin: 0;
+        }
+        .container {
+            margin: 20px;
+        }
+        .product-info {
+            float: left;
+            width: 50%;
+        }
+        .payment {
+            float: left;
+            width: 50%;
+            padding: 20px;
+        }
+        .clear {
+            clear: both;
+        }
+        .payment-button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Thanh toán sản phẩm</h1>
+</header>
+<div class="container">
+    <div class="product-info">
+        <h2>Thông tin Sản phẩm</h2>
+        <p>Tên Sản phẩm: Product 1</p>
+        <p>Giá: $20.00</p>
+    </div>
+    <div class="payment">
+        <h2>Phương thức thanh toán</h2>
+        <form action="/charge" method="post">
+            <!-- Thêm các trường thông tin cần thiết cho thanh toán Stripe -->
+            <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                    data-key="YOUR_STRIPE_API_KEY"
+                    data-amount="2000"  <!-- Giá sản phẩm tính theo đơn vị cents (ở đây là $20) -->
+            data-name="Tên Cửa hàng"
+            data-description="Thanh toán cho Sản phẩm 1"
+            data-currency="USD"
+            data-locale="auto">
+            </script>
+        </form>
+    </div>
+    <div class="clear"></div>
+</div>
+</body>
+</html>
